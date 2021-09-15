@@ -34,4 +34,6 @@ str(bromeliads)
 head(bromeliads, n = 5)
 tail(bromeliads, n = 5)
 
-# 
+# check names in bromeliads df ----
+
+names(bromeliads)
