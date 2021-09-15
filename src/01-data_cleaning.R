@@ -86,3 +86,10 @@ brom_tidy <- bromeliads %>%
     
   )
 
+# save to disk ----
+
+readr::write_csv(
+  x = brom_tidy, 
+  file = here("data/final", "bromeliads_tidy.csv")
+)
+
