@@ -53,7 +53,7 @@ bromeliads %>%
     dataset_id, 
     species, 
     max_water,
-    longest_leaf, 
+    total_detritus,
     extended_diameter
     ) %>%
 visdat::vis_miss()
@@ -64,8 +64,14 @@ visdat::vis_miss()
 # i.e., from zero to infinity (since you can't have negative values here)
 # if there are no violations, then summarize the dataset (brom_tidy) by
 # creating average values per 
-bromeliads %>%
+brom_tidy <- bromeliads %>%
   assert(within_bounds(0, Inf), extended_diameter) %>%
-  assert(within_bounds(0, Inf), longest_leaf) %>%
-  assert(within_bounds(0, Inf), max_water)
+  assert(within_bounds(0, Inf), total_detritus) %>%
+  assert(within_bounds(0, Inf), max_water) %>%
+  group_by(species) %>%
+  summarize(
+    mean_long_leaf = mean(total_detritus, na.rm = TRUE), 
+    mean_max_water = mean(max_water, na.rm = TRUE),
+    mean_ext_diam  = mean(extended_diameter, na.rm = TRUE)
+  )
 
