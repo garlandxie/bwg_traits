@@ -52,9 +52,9 @@ bromeliads %>%
     visit_id, 
     dataset_id, 
     species, 
-    num_leaf,
+    max_water,
     longest_leaf, 
-    max_water
+    extended_diameter
     ) %>%
 visdat::vis_miss()
 
@@ -65,7 +65,7 @@ visdat::vis_miss()
 # if there are no violations, then summarize the dataset (brom_tidy) by
 # creating average values per 
 bromeliads %>%
-  assert(within_bounds(0, Inf), num_leaf) %>%
+  assert(within_bounds(0, Inf), extended_diameter) %>%
   assert(within_bounds(0, Inf), longest_leaf) %>%
   assert(within_bounds(0, Inf), max_water)
 
