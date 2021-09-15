@@ -1,6 +1,9 @@
 # libraries -----
-library(here)   # for creating relative file-paths
-library(readr)
+library(here)    # for creating relative file-paths
+library(readr)   # for reading comma-delimited files
+library(assertr) # for validating data
+library(visdat)  # for visualizing missing data
+library(dplyr)   # for manipulating data 
 
 # import ----
 
@@ -37,3 +40,20 @@ tail(bromeliads, n = 5)
 # check names in bromeliads df ----
 
 names(bromeliads)
+
+# check for missing values ----
+
+# check the entire dataset first
+visdat::vis_miss(bromeliads)
+
+# check selected columns (easier to read)
+bromeliads %>%
+  select(
+    visit_id, 
+    dataset_id, 
+    species, 
+    num_leaf,
+    longest_leaf, 
+    max_water
+    ) %>%
+visdat::vis_miss()
