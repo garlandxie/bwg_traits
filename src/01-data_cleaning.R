@@ -62,8 +62,9 @@ visdat::vis_miss()
 
 # assert that the following columns are within a reasonable range
 # i.e., from zero to infinity (since you can't have negative values here)
+
 # if there are no violations, then summarize the dataset (brom_tidy) by
-# creating average values per 
+# creating average values per species (with their associated sd's)
 brom_tidy <- bromeliads %>%
   assert(within_bounds(0, Inf), extended_diameter) %>%
   assert(within_bounds(0, Inf), total_detritus) %>%
