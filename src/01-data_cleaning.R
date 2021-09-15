@@ -57,3 +57,15 @@ bromeliads %>%
     max_water
     ) %>%
 visdat::vis_miss()
+
+# validate data ----
+
+# assert that the following columns are within a reasonable range
+# i.e., from zero to infinity (since you can't have negative values here)
+# if there are no violations, then summarize the dataset (brom_tidy) by
+# creating average values per 
+bromeliads %>%
+  assert(within_bounds(0, Inf), num_leaf) %>%
+  assert(within_bounds(0, Inf), longest_leaf) %>%
+  assert(within_bounds(0, Inf), max_water)
+
