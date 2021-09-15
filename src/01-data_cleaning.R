@@ -28,3 +28,10 @@ list2env(
   envir = .GlobalEnv
 )
 
+# check packaging ----
+
+str(bromeliads)
+head(bromeliads, n = 5)
+tail(bromeliads, n = 5)
+
+# 
