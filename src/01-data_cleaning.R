@@ -90,7 +90,7 @@ errors <- bromeliads %>%
   assert(within_bounds(0, Inf), total_detritus) %>%
   assert(within_bounds(0, Inf), max_water) %>%
   
-  # insisfor any possible outliers where 
+  # insist for any possible outliers where 
   # I assume values exceeding four median absolute deviations
   # are considered to be "bad data point 
   # and should be removed from the analysis
