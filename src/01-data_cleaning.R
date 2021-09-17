@@ -108,8 +108,26 @@ if(length(errors$index) >1) {
   # and filter them out of the bromeliads data set
   # and then calculate summary statistics 
   error.list <- as.vector(errors$index)
+  
   brom_tidy <- bromeliads %>%
-    slice(-error.list) %>%
+    slice(-error.list) 
+  
+  brom_checks <- brom_tidy %>%
+    assert(within_bounds(0, Inf), extended_diameter) %>%
+    assert(within_bounds(0, Inf), total_detritus) %>%
+    assert(within_bounds(0, Inf), max_water) %>%
+    
+    # insist for any possible outliers where 
+    # I assume values exceeding four median absolute deviations
+    # are considered to be "bad data point 
+    # and should be removed from the analysis
+    insist(
+      within_n_mads(4), 
+      c(extended_diameter,max_water, total_detritus),  
+      error_fun = error_df_return
+    ) 
+  
+  brom_tidy <- brom_tidy %>%
     group_by(species) %>%
     summarize(
       
