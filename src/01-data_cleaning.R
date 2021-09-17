@@ -1,3 +1,24 @@
+################################################################################
+# Accompanying code for the exercise: 
+#   No environmental filtering of wasps and bees during urbanization
+#
+#
+# Corresponding authors for this script:  
+#   Garland Xie      
+#
+# Affiliations: 
+#       Department of Biological Sciences, 
+#       University of Toronto Scarborough,
+#       1265 Military Trail, Toronto, ON, M1C 1A4, Canada
+#       email: garland.xie@mail.utoronto.ca, 
+#
+#
+# Purpose of this R script: to quality control checks on three 
+# measured variables in the bromeliads dataset: 
+# (1) max water
+# (2) extended diameter
+# (3) total detritus
+
 # libraries --------------------------------------------------------------------
 library(here)    # for creating relative file-paths
 library(readr)   # for reading comma-delimited files
@@ -58,7 +79,7 @@ bromeliads %>%
     ) %>%
 visdat::vis_miss()
 
-# validate data ----
+# validate data ----------------------------------------------------------------
 
 errors <- bromeliads %>%
   
