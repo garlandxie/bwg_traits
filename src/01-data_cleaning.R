@@ -60,7 +60,7 @@ visdat::vis_miss()
 
 # validate data ----
 
-brom_tidy <- bromeliads %>%
+errors <- bromeliads %>%
   
   # assert that the following columns are within a reasonable range
   # i.e., from zero to infinity (since you can't have negative values here)
@@ -69,6 +69,65 @@ brom_tidy <- bromeliads %>%
   assert(within_bounds(0, Inf), total_detritus) %>%
   assert(within_bounds(0, Inf), max_water) %>%
   
+  # insisfor any possible outliers where 
+  # I assume values exceeding four median absolute deviations
+  # are considered to be "bad data point 
+  # and should be removed from the analysis
+  insist(
+    within_n_mads(4), 
+    c(extended_diameter,max_water, total_detritus),  
+    error_fun = error_df_return
+    ) 
+
+if(errors$index) {
+  
+  # if any errors are detected, return an object (data frame)
+  # where I then create a vector containing indexes with 
+  # bad data points (outliers)
+  # and filter them out of the bromeliads data set
+  # and then calculate summary statistics 
+  error.list <- as.vector(errors$index)
+  cleanbrom <- bromeliads %>%
+    slice(-error.list) %>%
+    group_by(species) %>%
+    summarize(
+      
+      # total detritus
+      mean_tot_det = mean(total_detritus, na.rm = TRUE), 
+      sd_tot_det   = sd(total_detritus, na.rm = TRUE),
+      
+      # max water 
+      mean_max_water = mean(max_water, na.rm = TRUE),
+      sd_ext_diam  = mean(extended_diameter, na.rm = TRUE),
+      
+      # extended diameter
+      mean_ext_diam  = mean(extended_diameter, na.rm = TRUE),
+      sd_ext_diam    = sd(extended_diameter, na.rm = TRUE)
+    )
+} else {
+  
+  # if there are no violations, then summarize the dataset (brom_tidy) by
+  # creating average values per species (with their associated sd's)
+  brom_tidy <- errors %>%
+    group_by(species) %>%
+    summarize(
+      
+      # total detritus
+      mean_tot_det = mean(total_detritus, na.rm = TRUE), 
+      sd_tot_det   = sd(total_detritus, na.rm = TRUE),
+      
+      # max water 
+      mean_max_water = mean(max_water, na.rm = TRUE),
+      sd_ext_diam  = mean(extended_diameter, na.rm = TRUE),
+      
+      # extended diameter
+      mean_ext_diam  = mean(extended_diameter, na.rm = TRUE),
+      sd_ext_diam    = sd(extended_diameter, na.rm = TRUE)
+      
+    )
+}
+
+brom_tidy <- 
   # if there are no violations, then summarize the dataset (brom_tidy) by
   # creating average values per species (with their associated sd's)
   group_by(species) %>%
