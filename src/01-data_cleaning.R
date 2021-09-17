@@ -112,15 +112,11 @@ if(length(errors$index) >1) {
   brom_tidy <- bromeliads %>%
     slice(-error.list) 
   
+  # rerun to very data validation
   brom_checks <- brom_tidy %>%
     assert(within_bounds(0, Inf), extended_diameter) %>%
     assert(within_bounds(0, Inf), total_detritus) %>%
     assert(within_bounds(0, Inf), max_water) %>%
-    
-    # insist for any possible outliers where 
-    # I assume values exceeding four median absolute deviations
-    # are considered to be "bad data point 
-    # and should be removed from the analysis
     insist(
       within_n_mads(4), 
       c(extended_diameter,max_water, total_detritus),  
