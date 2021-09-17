@@ -79,7 +79,7 @@ errors <- bromeliads %>%
     error_fun = error_df_return
     ) 
 
-if(errors$index) {
+if(length(errors$index) >1) {
   
   # if any errors are detected, return an object (data frame)
   # where I then create a vector containing indexes with 
@@ -123,10 +123,8 @@ if(errors$index) {
       # extended diameter
       mean_ext_diam  = mean(extended_diameter, na.rm = TRUE),
       sd_ext_diam    = sd(extended_diameter, na.rm = TRUE)
-      
     )
 }
-
 
 # save to disk ----
 
