@@ -127,25 +127,6 @@ if(errors$index) {
     )
 }
 
-brom_tidy <- 
-  # if there are no violations, then summarize the dataset (brom_tidy) by
-  # creating average values per species (with their associated sd's)
-  group_by(species) %>%
-  summarize(
-    
-    # total detritus
-    mean_tot_det = mean(total_detritus, na.rm = TRUE), 
-    sd_tot_det   = sd(total_detritus, na.rm = TRUE),
-    
-    # max water 
-    mean_max_water = mean(max_water, na.rm = TRUE),
-    sd_ext_diam  = mean(extended_diameter, na.rm = TRUE),
-    
-    # extended diameter
-    mean_ext_diam  = mean(extended_diameter, na.rm = TRUE),
-    sd_ext_diam    = sd(extended_diameter, na.rm = TRUE)
-    
-  )
 
 # save to disk ----
 
