@@ -64,6 +64,7 @@ brom_tidy <- bromeliads %>%
   
   # assert that the following columns are within a reasonable range
   # i.e., from zero to infinity (since you can't have negative values here)
+  # this pipeline is an analog of the assert function in the Julia language
   assert(within_bounds(0, Inf), extended_diameter) %>%
   assert(within_bounds(0, Inf), total_detritus) %>%
   assert(within_bounds(0, Inf), max_water) %>%
