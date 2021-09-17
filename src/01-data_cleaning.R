@@ -1,11 +1,11 @@
-# libraries -----
+# libraries --------------------------------------------------------------------
 library(here)    # for creating relative file-paths
 library(readr)   # for reading comma-delimited files
 library(assertr) # for validating data
 library(visdat)  # for visualizing missing data
 library(dplyr)   # for manipulating data 
 
-# import ----
+# import -----------------------------------------------------------------------
 
 # what files are in the BWG data folder? 
 myfiles <- list.files(
@@ -31,17 +31,17 @@ list2env(
   envir = .GlobalEnv
 )
 
-# check packaging ----
+# check packaging --------------------------------------------------------------
 
 str(bromeliads)
 head(bromeliads, n = 5)
 tail(bromeliads, n = 5)
 
-# check names in bromeliads df ----
+# check names in bromeliads df -------------------------------------------------
 
 names(bromeliads)
 
-# check for missing values ----
+# check for missing values -----------------------------------------------------
 
 # check the entire dataset first
 visdat::vis_miss(bromeliads)
@@ -132,7 +132,7 @@ if(length(errors$index) >1) {
     )
 }
 
-# save to disk ----
+# save to disk -----------------------------------------------------------------
 
 readr::write_csv(
   x = brom_tidy, 
