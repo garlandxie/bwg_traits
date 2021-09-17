@@ -87,20 +87,23 @@ if(length(errors$index) >1) {
   # and filter them out of the bromeliads data set
   # and then calculate summary statistics 
   error.list <- as.vector(errors$index)
-  cleanbrom <- bromeliads %>%
+  brom_tidy <- bromeliads %>%
     slice(-error.list) %>%
     group_by(species) %>%
     summarize(
       
       # total detritus
+      n_tot_det    = sum(!is.na(total_detritus)), 
       mean_tot_det = mean(total_detritus, na.rm = TRUE), 
       sd_tot_det   = sd(total_detritus, na.rm = TRUE),
       
       # max water 
+      n_max_water    = sum(!is.na(max_water)), 
       mean_max_water = mean(max_water, na.rm = TRUE),
-      sd_ext_diam  = mean(extended_diameter, na.rm = TRUE),
+      sd_ext_diam    = mean(extended_diameter, na.rm = TRUE),
       
       # extended diameter
+      n_ext_diam     = sum(!is.na(extended_diameter)), 
       mean_ext_diam  = mean(extended_diameter, na.rm = TRUE),
       sd_ext_diam    = sd(extended_diameter, na.rm = TRUE)
     )
@@ -113,14 +116,17 @@ if(length(errors$index) >1) {
     summarize(
       
       # total detritus
+      n_tot_det    = sum(!is.na(total_detritus)),
       mean_tot_det = mean(total_detritus, na.rm = TRUE), 
       sd_tot_det   = sd(total_detritus, na.rm = TRUE),
       
       # max water 
+      n_max_water    = sum(!is.na(max_water)), 
       mean_max_water = mean(max_water, na.rm = TRUE),
       sd_ext_diam  = mean(extended_diameter, na.rm = TRUE),
       
       # extended diameter
+      n_ext_diam     = sum(!is.na(extended_diameter)), 
       mean_ext_diam  = mean(extended_diameter, na.rm = TRUE),
       sd_ext_diam    = sd(extended_diameter, na.rm = TRUE)
     )
