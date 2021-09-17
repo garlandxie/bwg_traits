@@ -1,6 +1,9 @@
-species,mean_tot_det,sd_tot_det,mean_max_water,sd_ext_diam,mean_ext_diam
-Guzmania_sp,12.956432655042057,13.351451260511375,106.685,33.83660751176362,72.06521739130434
-Vriesea_gladioliflora,3.5523571428571428,2.173351881564258,220.71428571428572,0.2525169997541456,0.8257142857142857
-Vriesea_kupperiana,14.634666666666666,7.923852177655343,883.3333333333334,0.36555893277737495,0.8733333333333333
-Vriesea_sanguinolenta,26.414113083481325,41.25189118353539,737.2105263157895,45.61958515492663,73.51052631578948
-Vriesea_sp,29.948829057609196,37.897482732290484,393.2,36.98883559039583,72.09375
+verb,redux_fn,predicate,column,index,value
+insist,NA,within_n_mads(3),max_water,17,950
+insist,NA,within_n_mads(3),max_water,18,1530
+insist,NA,within_n_mads(3),max_water,41,1270
+insist,NA,within_n_mads(3),max_water,49,1352
+insist,NA,within_n_mads(3),max_water,57,1874
+insist,NA,within_n_mads(3),max_water,58,6116
+insist,NA,within_n_mads(3),max_water,60,1250
+insist,NA,within_n_mads(3),max_water,64,900

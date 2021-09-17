@@ -130,6 +130,6 @@ if(length(errors$index) >1) {
 
 readr::write_csv(
   x = brom_tidy, 
-  file = here("data/final", "bromeliads_tidy.csv")
+  file = here("data/final", "brom_tidy.csv")
 )
 
